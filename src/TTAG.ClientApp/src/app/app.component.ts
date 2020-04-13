@@ -1,7 +1,6 @@
 import { Component, InjectionToken, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
+import { WeatherForecastClient } from './_core/services/service.generated';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +12,11 @@ export class AppComponent implements OnInit {
   public baseUrl: string;
   public temperatureC: number[];
 
-  constructor(private http: HttpClient, @Inject(API_BASE_URL) baseUrl?: string) {
-    this.baseUrl = baseUrl ? baseUrl : '';
+  constructor(private weatherForecastClient: WeatherForecastClient) {
   }
 
   ngOnInit(): void {
-    this.http.get(this.baseUrl + '/WeatherForecast').subscribe((result: any[]) => {
+    this.weatherForecastClient.get().subscribe((result: any[]) => {
       this.temperatureC = result.map(x => x.temperatureC);
     });
   }
