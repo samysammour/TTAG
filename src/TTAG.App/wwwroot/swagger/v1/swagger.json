@@ -29,24 +29,6 @@
             }
           }
         }
-      },
-      "post": {
-        "tags": [
-          "WeatherForecast"
-        ],
-        "operationId": "WeatherForecast_Post",
-        "responses": {
-          "200": {
-            "x-nullable": false,
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/WeatherForecast"
-              }
-            }
-          }
-        }
       }
     }
   },
