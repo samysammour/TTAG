@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { SharedModule } from './_shared/shared.module';
+import { CoreModule } from './_core/core.module';
+
 // Environment
 import { environment } from '../environments/environment';
 import { API_BASE_URL } from './_core/services/service.generated';
@@ -16,7 +19,9 @@ import { API_BASE_URL } from './_core/services/service.generated';
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    CoreModule
   ],
   providers: [
     { provide: API_BASE_URL, useValue: environment.baseApiUrl },
