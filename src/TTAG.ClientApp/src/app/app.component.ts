@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.weatherForecastClient.post().subscribe((result: WeatherForecast[]) => {
+    this.weatherForecastClient.get().subscribe((result: WeatherForecast[]) => {
       this.weatherForecasts = result;
     });
   }
