@@ -1,5 +1,5 @@
 ﻿{
-  "x-generator": "NSwag v13.3.0.0 (NJsonSchema v10.1.11.0 (Newtonsoft.Json v9.0.0.0))",
+  "x-generator": "NSwag v13.3.0.0 (NJsonSchema v10.1.11.0 (Newtonsoft.Json v12.0.0.0))",
   "swagger": "2.0",
   "info": {
     "title": "My Title",
@@ -11,12 +11,12 @@
     "text/json"
   ],
   "paths": {
-    "/WeatherForecast": {
+    "/Art": {
       "get": {
         "tags": [
-          "WeatherForecast"
+          "Art"
         ],
-        "operationId": "WeatherForecast_Get",
+        "operationId": "Art_GetAll",
         "responses": {
           "200": {
             "x-nullable": false,
@@ -24,8 +24,250 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/WeatherForecast"
+                "$ref": "#/definitions/Art"
               }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Art"
+        ],
+        "operationId": "Art_Add",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "art",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Art"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Art"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Art"
+        ],
+        "operationId": "Art_Update",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "art",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Art"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Art"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Art"
+        ],
+        "operationId": "Art_Delete",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/Art/{id}": {
+      "get": {
+        "tags": [
+          "Art"
+        ],
+        "operationId": "Art_Get",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Art"
+            }
+          }
+        }
+      }
+    },
+    "/Artist": {
+      "get": {
+        "tags": [
+          "Artist"
+        ],
+        "operationId": "Artist_GetAll",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Artist"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Artist"
+        ],
+        "operationId": "Artist_Add",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "art",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Artist"
+        ],
+        "operationId": "Artist_Update",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "art",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Artist"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Artist"
+        ],
+        "operationId": "Artist_Delete",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/Artist/{id}": {
+      "get": {
+        "tags": [
+          "Artist"
+        ],
+        "operationId": "Artist_Get",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Artist"
             }
           }
         }
@@ -33,30 +275,101 @@
     }
   },
   "definitions": {
-    "WeatherForecast": {
-      "type": "object",
-      "required": [
-        "date",
-        "temperatureC",
-        "temperatureF"
+    "Art": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "category"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "category": {
+              "$ref": "#/definitions/ArtCategory"
+            },
+            "address": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        }
+      ]
+    },
+    "ArtCategory": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Painting",
+        "Sculpture",
+        "Photography"
       ],
+      "enum": [
+        0,
+        1,
+        2
+      ]
+    },
+    "Address": {
+      "type": "object",
       "properties": {
-        "date": {
-          "type": "string",
-          "format": "date-time"
+        "street1": {
+          "type": "string"
         },
-        "temperatureC": {
-          "type": "integer",
-          "format": "int32"
+        "street2": {
+          "type": "string"
         },
-        "temperatureF": {
-          "type": "integer",
-          "format": "int32"
+        "postalCode": {
+          "type": "string"
         },
-        "summary": {
+        "city": {
+          "type": "string"
+        },
+        "country": {
           "type": "string"
         }
       }
+    },
+    "Entity": {
+      "type": "object",
+      "required": [
+        "createdDate",
+        "lastUpdatedDate"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Artist": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     }
   }
 }

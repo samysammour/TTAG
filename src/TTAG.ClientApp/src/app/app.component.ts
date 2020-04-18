@@ -1,6 +1,5 @@
-import { Component, InjectionToken, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { WeatherForecastClient, WeatherForecast } from './_core/services/service.generated';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ArtistClient, Artist } from './_core/services/service.generated';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +9,14 @@ import { WeatherForecastClient, WeatherForecast } from './_core/services/service
 export class AppComponent implements OnInit {
   public title = 'TTAG';
   public baseUrl: string;
-  public weatherForecasts: WeatherForecast[];
+  public artists: Artist[];
 
-  constructor(private weatherForecastClient: WeatherForecastClient) {
+  constructor(private artistClient: ArtistClient) {
   }
 
   ngOnInit(): void {
-    this.weatherForecastClient.get().subscribe((result: WeatherForecast[]) => {
-      this.weatherForecasts = result;
+    this.artistClient.getAll().subscribe((result: Artist[]) => {
+      this.artists = result;
     });
   }
 }

@@ -13,6 +13,11 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TTAG.Domain\TTAG.Domain.csproj" />
+    <ProjectReference Include="..\TTAG.Infrastructure.Azure\TTAG.Infrastructure.Azure.csproj" />
+  </ItemGroup>
+
   <Target Name="NSwag" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
     <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)References" />
     <Exec Command="$(NSwagExe_Core30) run ttag.nswag /variables:Configuration=$(Configuration)" />
