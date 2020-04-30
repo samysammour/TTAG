@@ -272,6 +272,39 @@
           }
         }
       }
+    },
+    "/Users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_Add",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "name": "art",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -369,6 +402,48 @@
             }
           }
         }
+      ]
+    },
+    "User": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "role"
+          ],
+          "properties": {
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "role": {
+              "$ref": "#/definitions/UserRoles"
+            }
+          }
+        }
+      ]
+    },
+    "UserRoles": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Admin",
+        "User"
+      ],
+      "enum": [
+        0,
+        1
       ]
     }
   }

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using TTAG.Domain.Repository;
+using TTAG.Domain.Service;
 
 namespace TTAK
 {
@@ -33,6 +34,8 @@ namespace TTAK
 
             services.TryAddScoped<IArtRepository, ArtRepository>();
             services.TryAddScoped<IArtistRepository, ArtistRepository>();
+            services.TryAddScoped<IUserRepository, UserRepository>();
+            services.TryAddScoped<IUserService, UserService>();
 
             services.AddControllers();
             services.AddSwaggerDocument();
