@@ -8,8 +8,7 @@ const COMPONENTS = [];
   declarations: [...COMPONENTS],
   imports: [
     CommonModule,
-    RouterModule,
-    SharedModule,
+    RouterModule
   ],
   exports: [...COMPONENTS]
 })
