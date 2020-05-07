@@ -1,0 +1,29 @@
+Art name: <input type="text" name="art-name" id="art-name" [(ngModel)]="art.name" />
+<br />
+<br />
+Art country: <input type="text" name="art-country" id="art-country" />
+
+<br />
+<button (click)="onAddClicked()">
+    Add
+</button>
+
+<br />
+<br />
+<br />
+<table>
+    <tr>
+        <th>Name</th>
+        <!-- <th>Country</th> -->
+        <th>Created date</th>
+        <th>Last updated date</th>
+        <th> Actions </th>
+    </tr>
+    <tr *ngFor="let a of arts">
+        <td>{{a.name}}</td>
+        <!-- <td>{{a.country}}</td> -->
+        <td>{{a.createdDate}}</td>
+        <td>{{a.lastUpdatedDate}}</td>
+        <td>delete &nbsp;&nbsp; / &nbsp;&nbsp; edit</td>
+    </tr>
+</table>

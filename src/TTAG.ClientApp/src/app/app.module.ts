@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +13,9 @@ import { CoreModule } from './_core/core.module';
 import { environment } from '../environments/environment';
 import { API_BASE_URL } from './_core/services/service.generated';
 
+import { ToastrModule } from 'ngx-toastr';
+import { ArtSectionModule } from './modules/art-section/art-section.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -19,9 +23,14 @@ import { API_BASE_URL } from './_core/services/service.generated';
   imports: [
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    ArtSectionModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-left',
+    }),
   ],
   providers: [
     { provide: API_BASE_URL, useValue: environment.baseApiUrl },

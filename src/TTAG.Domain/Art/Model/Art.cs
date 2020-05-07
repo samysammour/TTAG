@@ -12,4 +12,18 @@
 
         public Address Address { get; set; } = new Address();
     }
+
+    public static partial class Extensions
+    {
+        public static string AddName(this Art art, string value) => art.Name = value;
+    }
+
+    public class x
+    {
+        public x()
+        {
+            var art = new Art();
+            art.AddName("samy");
+        }
+    }
 }

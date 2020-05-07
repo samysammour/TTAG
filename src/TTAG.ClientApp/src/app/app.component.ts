@@ -9,14 +9,10 @@ import { ArtistClient, Artist } from './_core/services/service.generated';
 export class AppComponent implements OnInit {
   public title = 'TTAG';
   public baseUrl: string;
-  public artists: Artist[];
 
   constructor(private artistClient: ArtistClient) {
   }
 
   ngOnInit(): void {
-    this.artistClient.getAll().subscribe((result: Artist[]) => {
-      this.artists = result;
-    });
   }
 }
