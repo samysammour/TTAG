@@ -15,19 +15,22 @@ import { API_BASE_URL } from './_core/services/service.generated';
 
 import { ToastrModule } from 'ngx-toastr';
 import { ArtSectionModule } from './modules/art-section/art-section.module';
+import { WelcomeComponent } from './modules/welcome/welcome.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WelcomeComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
+    ArtSectionModule,
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    ArtSectionModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-left',
     }),
@@ -35,6 +38,6 @@ import { ArtSectionModule } from './modules/art-section/art-section.module';
   providers: [
     { provide: API_BASE_URL, useValue: environment.baseApiUrl },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
