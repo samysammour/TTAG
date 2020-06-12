@@ -1,29 +1,26 @@
-Art name: <input type="text" name="art-name" id="art-name" [(ngModel)]="art.name" />
-<br />
-<br />
-Art country: <input type="text" name="art-country" id="art-country" />
+ <div class="card-container">
+    <div class="card card-small" (click)="openDialog()"  tabindex="0">
+        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
 
-<br />
-<button (click)="onAddClicked()">
-    Add
-</button>
+      <span>New Art</span>
+    </div>
+</div> 
 
-<br />
-<br />
-<br />
-<table>
-    <tr>
-        <th>Name</th>
-        <!-- <th>Country</th> -->
-        <th>Created date</th>
-        <th>Last updated date</th>
-        <th> Actions </th>
-    </tr>
-    <tr *ngFor="let a of arts">
-        <td>{{a.name}}</td>
-        <!-- <td>{{a.country}}</td> -->
-        <td>{{a.createdDate}}</td>
-        <td>{{a.lastUpdatedDate}}</td>
-        <td>delete &nbsp;&nbsp; / &nbsp;&nbsp; edit</td>
-    </tr>
-</table>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Year</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let art of arts">
+        <th><a class="nav-link" href="#">{{art.name}}</a></th>
+        <td>{{art.description}}</td>
+        <td>{{art.releaseYear}}</td>
+        <td>{{art.price}}</td>
+      </tr>
+    </tbody>
+  </table>

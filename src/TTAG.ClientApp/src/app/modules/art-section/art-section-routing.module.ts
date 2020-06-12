@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
-const routes: Routes = [];
+import { ArtSectionComponent } from './art-section.component';
+import { SharedModule } from 'src/app/_shared/shared.module';
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+     RouterModule.forChild([
+          {path: 'art' , component: ArtSectionComponent}
+       ]),
+  ],
   exports: [RouterModule]
 })
-export class ArtSectionRoutingModule { }
+export class ArtSectionRoutingModule {
+
+
+ }
