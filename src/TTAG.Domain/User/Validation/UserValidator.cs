@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TTAG.Domain.Model;
+﻿using TTAG.Domain.Model;
 
 namespace TTAG.Domain.Validation
 {
@@ -14,6 +13,7 @@ namespace TTAG.Domain.Validation
 
         public bool IsValid()
         {
+            this.CheckNotNullOrEmpty(this.user.UserName, "UserName is empty");
             this.CheckNotNullOrEmpty(this.user.FirstName, "FirstName is empty");
             this.CheckNotNullOrEmpty(this.user.LastName, "LastName is empty");
             this.CheckNotNullOrEmpty(this.user.Email, "Email is empty");

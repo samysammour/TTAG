@@ -29,5 +29,21 @@ namespace TTAK.Controllers
         {
             return await this.service.AddOrUpdateAsync(art).ConfigureAwait(false);
         }
+
+        [HttpPost]
+        public async string Login(string Username,string Password)
+        {
+            return await this.service.Login(Username, Password).ConfigureAwait(false);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async string Login(string Username, string Password)
+        {
+            var identity = User.Identity as ClaimsIdentity;
+            IEnumerable<Claim> claims = identity.Claims;
+            var idclaim = claims.Where(x => x.Type == "Id").FirstOrDefault();
+            return idclaim.Value; ;
+        }
     }
 }

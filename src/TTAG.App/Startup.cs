@@ -23,6 +23,24 @@ namespace TTAK
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string securitykey = "this_TTAG_securitykey!@#$%^";
+            var symmetricsecuritykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securitykey));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(option =>
+                {
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "TTAG_App",
+                        ValidAudience = "TTAG_Users",
+                        IssuerSigningKey = symmetricsecuritykey
+                    };
+                });
+
+
             services.AddCors(options =>
             {
                 options.AddPolicy(this.AllowOrigins,
@@ -48,6 +66,8 @@ namespace TTAK
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseOpenApi();
             app.UseSwaggerUi3();
