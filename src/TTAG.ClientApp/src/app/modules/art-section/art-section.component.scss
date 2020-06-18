@@ -1,12 +1,12 @@
-
-  .card-container {
+ .button-container {
     display: block;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 16px;
+    width: 80%;
+    margin: 15px auto;
   }
 
-  .card {
+  .button {
     border-radius: 4px;
     border: 1px solid #eee;
     background-color: #fafafa;
@@ -22,11 +22,21 @@
     line-height: 24px;
   }
 
-  .card-container .card:not(.highlight-card) {
+  .button-container .button:not(.highlight-card) {
     cursor: pointer;
   }
 
-  .card-container .card:not(.highlight-card):hover {
+  .button-container .button:not(.highlight-card):hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  }
+
+  table {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .mat-cell {
+      width: 20px;
+      text-align: justify;
   }

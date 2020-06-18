@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WelcomeComponent } from './modules/welcome/welcome.component';
+import { DashboardComponent } from './modules/ui-component/dashboard/dashboard.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [        
+    { path : "dashboard", component : DashboardComponent } ,
+    { path : "" ,  redirectTo:'/dashboard'  ,pathMatch: 'full'} 
+  ];
 
 @NgModule({
-  imports: [RouterModule.forRoot([
-        { path : "welcome", component : WelcomeComponent } ,
-        { path : "" ,  redirectTo:'/welcome'  ,pathMatch: 'full'} 
-  ])],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
