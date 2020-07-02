@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TTAG.Domain.Model;
+using TTAG.Domain.Profile.Helpers;
 using TTAG.Domain.Repository;
 using TTAG.Infrastructure.Azure;
 
@@ -16,11 +17,13 @@ namespace TTAK.Controllers
     {
         private readonly ILogger<ArtController> logger;
         private readonly IArtRepository repository;
+        private readonly IProfileHelper profileHelper;
 
-        public ArtController(ILogger<ArtController> logger, IArtRepository repository)
+        public ArtController(ILogger<ArtController> logger, IArtRepository repository, IProfileHelper profileHelper)
         {
             this.logger = logger;
             this.repository = repository;
+            this.profileHelper = profileHelper;
         }
 
         [HttpGet]
@@ -32,6 +35,12 @@ namespace TTAK.Controllers
         [HttpGet("{id}")]
         public async Task<Art> GetAsync(string id)
         {
+            if (!this.profileHelper.IsAdmin())
+            {
+                throw new UnauthorizedAccessException($"User {this.profileHelper.GetEmail()} is not authorized");
+            }
+            //var profile = this.profileHelper.GetCurrentProfile();
+
             return await this.repository.GetByIdAsync(id).ConfigureAwait(false);
         }
 
