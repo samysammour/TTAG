@@ -15,7 +15,7 @@ namespace TTAG.App.HelperClasses
             var symmetricsecuritykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securitykey));
             var signincredentials = new SigningCredentials(symmetricsecuritykey, SecurityAlgorithms.HmacSha256Signature);
             var claims = new List<Claim>();
-            claims.Add(new Claim(JwtOurClaims.Id, UserId));
+            claims.Add(new Claim("Id", UserId));
             var token = new JwtSecurityToken(
 
                 issuer: "TTAG_App",
