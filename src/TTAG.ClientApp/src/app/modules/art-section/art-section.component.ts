@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { Art } from 'src/app/_core/services/service.generated';
 import { ArtService } from './services/art.service';
 
@@ -8,10 +8,16 @@ import { ArtService } from './services/art.service';
   styleUrls: ['./art-section.component.scss']
 })
 export class ArtSectionComponent implements OnInit {
+  public displayedColumns: string[] = ['name', 'description', 'releaseYear', 'price', 'referenceUrl', 'category'];
   public art: Art;
   public arts: Array<Art>;
+  public artCategory: Array<string>;
 
-  constructor(private service: ArtService, private ref: ChangeDetectorRef) {
+
+  constructor(
+    private service: ArtService,
+    private ref: ChangeDetectorRef,
+  ) {
     this.art = new Art();
     this.arts = new Array<Art>();
   }
@@ -32,4 +38,11 @@ export class ArtSectionComponent implements OnInit {
       this.ref.markForCheck();
     });
   }
+
+
 }
+
+
+
+
+

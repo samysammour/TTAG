@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TTAG.App.MappingProfiles;
+using TTAG.Domain.Profile.Helpers
 using TTAG.Domain.Repository;
 using TTAG.Domain.Service;
 
@@ -59,6 +60,8 @@ namespace TTAK
             services.TryAddScoped<IArtistRepository, ArtistRepository>();
             services.TryAddScoped<IUserRepository, UserRepository>();
             services.TryAddScoped<IUserService, UserService>();
+
+            services.TryAddScoped<IProfileHelper, ProfileHelper>();
 
             services.AddControllers();
             services.AddSwaggerDocument();

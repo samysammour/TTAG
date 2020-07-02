@@ -1,18 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ArtSectionRoutingModule } from './art-section-routing.module';
 import { ArtSectionComponent } from './art-section.component';
+import { ArtCreatorComponent } from './creation/art-creator/art-creator.component';
 
-const COMPONENTS = [ArtSectionComponent];
+import { MaterialModule } from 'src/app/material-module';
+
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [
+    ArtSectionComponent,
+    ArtCreatorComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
-    ArtSectionRoutingModule
+    ArtSectionRoutingModule,
+    MaterialModule ,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports: [...COMPONENTS]
+
+   entryComponents:[ArtCreatorComponent]
 })
 export class ArtSectionModule { }
