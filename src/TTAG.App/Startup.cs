@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TTAG.App.MappingProfiles;
-using TTAG.Domain.Profile.Helpers
+using TTAG.Domain.Profile.Helpers;
 using TTAG.Domain.Repository;
 using TTAG.Domain.Service;
 

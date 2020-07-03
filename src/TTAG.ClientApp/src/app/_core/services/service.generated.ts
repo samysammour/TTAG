@@ -574,6 +574,227 @@ export class ArtistClient implements IArtistClient {
     }
 }
 
+export interface IUsersClient {
+    add(user: User): Observable<User>;
+    login(username?: string | null | undefined, password?: string | null | undefined): Observable<FileResponse | null>;
+    getUser(id?: string | null | undefined): Observable<FileResponse | null>;
+    testYourToken(username?: string | null | undefined, password?: string | null | undefined): Observable<FileResponse | null>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class UsersClient implements IUsersClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    add(user: User): Observable<User> {
+        let url_ = this.baseUrl + "/Users/Add";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(user);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processAdd(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processAdd(<any>response_);
+                } catch (e) {
+                    return <Observable<User>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<User>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processAdd(response: HttpResponseBase): Observable<User> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = User.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<User>(<any>null);
+    }
+
+    login(username?: string | null | undefined, password?: string | null | undefined): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Users/Login?";
+        if (username !== undefined)
+            url_ += "Username=" + encodeURIComponent("" + username) + "&"; 
+        if (password !== undefined)
+            url_ += "Password=" + encodeURIComponent("" + password) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processLogin(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processLogin(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processLogin(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(<any>null);
+    }
+
+    getUser(id?: string | null | undefined): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Users?";
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetUser(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetUser(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetUser(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(<any>null);
+    }
+
+    testYourToken(username?: string | null | undefined, password?: string | null | undefined): Observable<FileResponse | null> {
+        let url_ = this.baseUrl + "/Users/TestYourToken?";
+        if (username !== undefined)
+            url_ += "Username=" + encodeURIComponent("" + username) + "&"; 
+        if (password !== undefined)
+            url_ += "Password=" + encodeURIComponent("" + password) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processTestYourToken(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processTestYourToken(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse | null>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse | null>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processTestYourToken(response: HttpResponseBase): Observable<FileResponse | null> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse | null>(<any>null);
+    }
+}
+
 export class Entity implements IEntity {
     id?: string | undefined;
     createdDate!: moment.Moment;
@@ -627,6 +848,13 @@ export interface IEntity {
 
 export class Art extends Entity implements IArt {
     name?: string | undefined;
+    description?: string | undefined;
+    dimensions?: string | undefined;
+    releaseYear!: number;
+    originalPrice!: number;
+    price!: number;
+    referenceUrl?: string | undefined;
+    artistId?: string | undefined;
     category!: ArtCategory;
     address?: Address | undefined;
 
@@ -638,6 +866,13 @@ export class Art extends Entity implements IArt {
         super.init(_data);
         if (_data) {
             this.name = _data["name"];
+            this.description = _data["description"];
+            this.dimensions = _data["dimensions"];
+            this.releaseYear = _data["releaseYear"];
+            this.originalPrice = _data["originalPrice"];
+            this.price = _data["price"];
+            this.referenceUrl = _data["referenceUrl"];
+            this.artistId = _data["artistId"];
             this.category = _data["category"];
             this.address = _data["address"] ? Address.fromJS(_data["address"]) : <any>undefined;
         }
@@ -653,6 +888,13 @@ export class Art extends Entity implements IArt {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["description"] = this.description;
+        data["dimensions"] = this.dimensions;
+        data["releaseYear"] = this.releaseYear;
+        data["originalPrice"] = this.originalPrice;
+        data["price"] = this.price;
+        data["referenceUrl"] = this.referenceUrl;
+        data["artistId"] = this.artistId;
         data["category"] = this.category;
         data["address"] = this.address ? this.address.toJSON() : <any>undefined;
         super.toJSON(data);
@@ -669,6 +911,13 @@ export class Art extends Entity implements IArt {
 
 export interface IArt extends IEntity {
     name?: string | undefined;
+    description?: string | undefined;
+    dimensions?: string | undefined;
+    releaseYear: number;
+    originalPrice: number;
+    price: number;
+    referenceUrl?: string | undefined;
+    artistId?: string | undefined;
     category: ArtCategory;
     address?: Address | undefined;
 }
@@ -780,6 +1029,73 @@ export class Artist extends Entity implements IArtist {
 export interface IArtist extends IEntity {
     name?: string | undefined;
     country?: string | undefined;
+}
+
+export class User extends Entity implements IUser {
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    userName?: string | undefined;
+    email?: string | undefined;
+    password?: string | undefined;
+    salt?: string | undefined;
+
+    constructor(data?: IUser) {
+        super(data);
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.firstName = _data["firstName"];
+            this.lastName = _data["lastName"];
+            this.userName = _data["userName"];
+            this.email = _data["email"];
+            this.password = _data["password"];
+            this.salt = _data["salt"];
+        }
+    }
+
+    static fromJS(data: any): User {
+        data = typeof data === 'object' ? data : {};
+        let result = new User();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["userName"] = this.userName;
+        data["email"] = this.email;
+        data["password"] = this.password;
+        data["salt"] = this.salt;
+        super.toJSON(data);
+        return data; 
+    }
+
+    clone(): User {
+        const json = this.toJSON();
+        let result = new User();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IUser extends IEntity {
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    userName?: string | undefined;
+    email?: string | undefined;
+    password?: string | undefined;
+    salt?: string | undefined;
+}
+
+export interface FileResponse {
+    data: Blob;
+    status: number;
+    fileName?: string;
+    headers?: { [name: string]: any };
 }
 
 export class ApiException extends Error {

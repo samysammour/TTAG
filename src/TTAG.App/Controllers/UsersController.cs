@@ -32,12 +32,14 @@ namespace TTAK.Controllers
         }
 
         [HttpPost]
+        [Route("Add")]
         public async Task<User> AddAsync(User user)
         {
             return await this.service.AddOrUpdateAsync(user).ConfigureAwait(false);
         }
 
         [HttpPost]
+        [Route("Login")]
         public IActionResult Login(string Username, string Password)
         {
             return Ok(service.Login(Username, Password));

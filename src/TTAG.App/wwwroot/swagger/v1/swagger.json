@@ -5,11 +5,6 @@
     "title": "My Title",
     "version": "1.0.0"
   },
-  "produces": [
-    "text/plain",
-    "application/json",
-    "text/json"
-  ],
   "paths": {
     "/Art": {
       "get": {
@@ -17,6 +12,11 @@
           "Art"
         ],
         "operationId": "Art_GetAll",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "responses": {
           "200": {
             "x-nullable": false,
@@ -39,6 +39,11 @@
           "application/json",
           "text/json",
           "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -71,6 +76,11 @@
           "text/json",
           "application/*+json"
         ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "art",
@@ -97,6 +107,11 @@
           "Art"
         ],
         "operationId": "Art_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "type": "string",
@@ -122,6 +137,11 @@
           "Art"
         ],
         "operationId": "Art_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "type": "string",
@@ -148,6 +168,11 @@
           "Artist"
         ],
         "operationId": "Artist_GetAll",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "responses": {
           "200": {
             "x-nullable": false,
@@ -170,6 +195,11 @@
           "application/json",
           "text/json",
           "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -202,6 +232,11 @@
           "text/json",
           "application/*+json"
         ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "art",
@@ -228,6 +263,11 @@
           "Artist"
         ],
         "operationId": "Artist_Delete",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "type": "string",
@@ -253,6 +293,11 @@
           "Artist"
         ],
         "operationId": "Artist_Get",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "type": "string",
@@ -272,6 +317,131 @@
           }
         }
       }
+    },
+    "/Users/Add": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_Add",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/Users/Login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_Login",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Username",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/Users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_GetUser",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Id",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/Users/TestYourToken": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_TestYourToken",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "Username",
+            "in": "query",
+            "x-nullable": true
+          },
+          {
+            "type": "string",
+            "name": "Password",
+            "in": "query",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -283,10 +453,37 @@
         {
           "type": "object",
           "required": [
+            "releaseYear",
+            "originalPrice",
+            "price",
             "category"
           ],
           "properties": {
             "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "dimensions": {
+              "type": "string"
+            },
+            "releaseYear": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "originalPrice": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "price": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "referenceUrl": {
+              "type": "string"
+            },
+            "artistId": {
               "type": "string"
             },
             "category": {
@@ -366,6 +563,37 @@
             },
             "country": {
               "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "User": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "userName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "salt": {
+              "type": "string",
+              "format": "byte"
             }
           }
         }
