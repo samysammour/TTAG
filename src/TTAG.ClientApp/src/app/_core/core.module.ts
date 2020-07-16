@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../_shared/shared.module';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
 
 
-const COMPONENTS = [];
+const COMPONENTS = [MainNavComponent];
 
 @NgModule({
   declarations: [...COMPONENTS],

@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ArtSectionComponent } from './art-section.component';
-import { ArtCreatorComponent } from './creation/art-creator/art-creator.component';
+import { ArtListComponent } from './pages/list/art-list.component';
 
 const routes: Routes = [
-  { path: 'art', component: ArtSectionComponent },
-  { path: 'art/create', component: ArtCreatorComponent }
-]
+   { path: '', component: ArtListComponent, pathMatch: 'full' }
+];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes),
-  ],
-  exports: [RouterModule]
+   imports: [RouterModule.forChild(routes)],
+   exports: [RouterModule]
 })
-export class ArtSectionRoutingModule {
-}
+export class ArtSectionRoutingModule {}

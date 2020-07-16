@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ArtCategoryPipe } from './pipes/art-category.pipe';
+import {MatToolbarModule} from '@angular/material/toolbar';
+// import { ArtCategoryPipe } from './pipes/art-category.pipe';
 
 const COMPONENTS = [];
 
@@ -10,7 +11,8 @@ const COMPONENTS = [];
   imports: [
     CommonModule,
     RouterModule,
+    MatToolbarModule
   ],
-  exports: []
+  exports: [...COMPONENTS]
 })
 export class SharedModule {}
