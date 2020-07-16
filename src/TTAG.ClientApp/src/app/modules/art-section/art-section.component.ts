@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
-import { Art } from 'src/app/_core/services/service.generated';
+import { Art, ArtCategory } from 'src/app/_core/services/service.generated';
 import { ArtService } from './services/art.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class ArtSectionComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'description', 'releaseYear', 'price', 'referenceUrl', 'category'];
   public art: Art;
   public arts: Array<Art>;
-  public artCategory: Array<string>;
+  public artCategory: ArtCategory;
 
 
   constructor(

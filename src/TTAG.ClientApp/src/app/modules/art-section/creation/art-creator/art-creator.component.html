@@ -54,14 +54,14 @@
       </mat-form-field>
     </div>
 
-    <!-- <div class="col">
+    <div class="col">
       <mat-form-field appearance="fill">
         <mat-label>Art category</mat-label>
         <mat-select formControlName="artCategory">
-          <mat-option *ngFor="let type of artCategory | keyvalue" [value]="type.key">{{type.value}}</mat-option>
+          <mat-option *ngFor="let type of artCategory" [value]="type">{{type}}</mat-option>
         </mat-select>
       </mat-form-field>
-    </div> -->
+    </div>
 
     <div class="col">
       <mat-form-field appearance="fill">
