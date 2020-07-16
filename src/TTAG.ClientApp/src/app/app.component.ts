@@ -7,7 +7,7 @@ import { ArtistClient, Artist } from './_core/services/service.generated';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public title = 'TTAG';
+
   public baseUrl: string;
 
   constructor(private artistClient: ArtistClient) {

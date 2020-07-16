@@ -31,7 +31,7 @@ export class ArtCreatorComponent implements OnInit {
       description: [null],
       price: [0],
       releaseYear: [null],
-      //artCategory: [null],
+      artCategory: [null],
       country: [null],
       city: [null],
       postalCode: [null],
