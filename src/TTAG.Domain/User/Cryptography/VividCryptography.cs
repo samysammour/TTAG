@@ -1,15 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace TTAG.Domain.Cryptography
+﻿namespace TTAG.Domain.Cryptography
 {
-    class VividCryptography
+    using System;
+    using System.IO;
+    using System.Security.Cryptography;
+    using System.Text;
+
+    public class VividCryptography
     {
         private readonly string key;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="VividCryptography"/> class.
         /// Initial VividCryptography
         /// </summary>
         /// <param name="key">Encryption/Decryption key 64Byte</param>

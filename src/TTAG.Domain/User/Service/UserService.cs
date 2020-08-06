@@ -1,9 +1,9 @@
 ﻿namespace TTAG.Domain.Service
 {
-    using Model;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Model;
     using TTAG.Domain.Cryptography;
     using TTAG.Domain.Repository;
     using TTAG.Domain.Validation;
@@ -16,20 +16,19 @@
         public UserService(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
-            hashing = new VividHashing();
+            this.hashing = new VividHashing();
         }
 
         public async Task<User> AddOrUpdateAsync(User user)
         {
-
             var validator = new UserValidator(user);
             if (!validator.IsValid())
             {
-
                 throw new Exception(validator.GetMessage());
             }
-            var salt = hashing.GetSalt();
-            var cipher = hashing.GetCipherText(user.Password, salt);
+
+            var salt = this.hashing.GetSalt();
+            var cipher = this.hashing.GetCipherText(user.Password, salt);
 
             user.Salt = salt;
             user.Password = cipher;
@@ -38,16 +37,18 @@
             return user;
         }
 
-        public string Login(string Username, string Password)
+        public string Login(string username, string password)
         {
-            var user = userRepository.GetAll().Where(x => x.UserName == Username).FirstOrDefault();
+            var user = this.userRepository.GetAll().Where(x => x.UserName == username).FirstOrDefault();
 
             if (user == null)
+            {
                 return string.Empty;
+            }
 
             var salt = user.Salt;
 
-            if (hashing.CompareHash(Password, user.Password, salt))
+            if (this.hashing.CompareHash(password, user.Password, salt))
             {
                 return user.Id;
             }

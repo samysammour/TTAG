@@ -1,9 +1,9 @@
-﻿using System;
-using System.Security.Cryptography;
-
-namespace TTAG.Domain.Cryptography
+﻿namespace TTAG.Domain.Cryptography
 {
-    class VividHashing
+    using System;
+    using System.Security.Cryptography;
+
+    public class VividHashing
     {
         private readonly int hashSize;
 
@@ -12,9 +12,10 @@ namespace TTAG.Domain.Cryptography
         private readonly int iterations;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="VividHashing"/> class.
         /// Initial VividHashing with default values
         /// hashSize = 256
-        /// saltSize = 32 
+        /// saltSize = 32
         /// interation = 10000
         /// </summary>
         public VividHashing()
@@ -25,6 +26,7 @@ namespace TTAG.Domain.Cryptography
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="VividHashing"/> class.
         /// Initial VividHashing with custom values
         /// </summary>
         /// <param name="hashSize">Hash size</param>

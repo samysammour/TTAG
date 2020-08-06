@@ -1,6 +1,5 @@
 ﻿namespace TTAG.Domain.Model
 {
-    using System;
     using TTAG.Common;
 
     public class Artist : Entity

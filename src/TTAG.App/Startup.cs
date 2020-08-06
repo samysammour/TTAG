@@ -1,27 +1,27 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using TTAG.App.MappingProfiles;
-using TTAG.Domain.Profile.Helpers;
-using TTAG.Domain.Repository;
-using TTAG.Domain.Service;
-
 namespace TTAK
 {
+    using System.Text;
+    using AutoMapper;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection.Extensions;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.IdentityModel.Tokens;
+    using TTAG.App.MappingProfiles;
+    using TTAG.Domain.Profile.Helpers;
+    using TTAG.Domain.Repository;
+    using TTAG.Domain.Service;
+
     public class Startup
     {
-        readonly string AllowOrigins = "AllowOrigins";
+        private readonly string allowOrigins = "AllowOrigins";
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -29,7 +29,6 @@ namespace TTAK
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             string securitykey = "this_TTAG_securitykey!@#$%^";
             var symmetricsecuritykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securitykey));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -42,18 +41,16 @@ namespace TTAK
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = "TTAG_App",
                         ValidAudience = "TTAG_Users",
-                        IssuerSigningKey = symmetricsecuritykey
+                        IssuerSigningKey = symmetricsecuritykey,
                     };
                 });
 
-
             services.AddCors(options =>
             {
-                options.AddPolicy(this.AllowOrigins,
+                options.AddPolicy(this.allowOrigins,
                         builder => builder.AllowAnyOrigin()
                                     .AllowAnyMethod()
-                                    .AllowAnyHeader()
-                );
+                                    .AllowAnyHeader());
             });
 
             services.TryAddScoped<IArtRepository, ArtRepository>();
@@ -86,7 +83,7 @@ namespace TTAK
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseCors(this.AllowOrigins);
+            app.UseCors(this.allowOrigins);
 
             app.UseAuthorization();
 

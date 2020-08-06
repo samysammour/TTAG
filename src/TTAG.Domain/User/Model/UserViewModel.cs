@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TTAG.Domain.Model
+﻿namespace TTAG.Domain.Model
 {
-   public class UserViewModel
+    public class UserViewModel
     {
         public string Id { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

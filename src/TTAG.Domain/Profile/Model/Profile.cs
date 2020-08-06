@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-
-namespace TTAG.Domain.Profile.Model
+﻿namespace TTAG.Domain.Profile.Model
 {
+    using System.Linq;
+    using System.Security.Claims;
+
     public class Profile
     {
         public Profile()

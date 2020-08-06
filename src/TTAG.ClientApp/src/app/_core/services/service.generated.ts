@@ -649,9 +649,9 @@ export class UsersClient implements IUsersClient {
     login(username?: string | null | undefined, password?: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Users/Login?";
         if (username !== undefined)
-            url_ += "Username=" + encodeURIComponent("" + username) + "&"; 
+            url_ += "username=" + encodeURIComponent("" + username) + "&"; 
         if (password !== undefined)
-            url_ += "Password=" + encodeURIComponent("" + password) + "&"; 
+            url_ += "password=" + encodeURIComponent("" + password) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -699,7 +699,7 @@ export class UsersClient implements IUsersClient {
     getUser(id?: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Users?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -747,9 +747,9 @@ export class UsersClient implements IUsersClient {
     testYourToken(username?: string | null | undefined, password?: string | null | undefined): Observable<FileResponse | null> {
         let url_ = this.baseUrl + "/Users/TestYourToken?";
         if (username !== undefined)
-            url_ += "Username=" + encodeURIComponent("" + username) + "&"; 
+            url_ += "username=" + encodeURIComponent("" + username) + "&"; 
         if (password !== undefined)
-            url_ += "Password=" + encodeURIComponent("" + password) + "&"; 
+            url_ += "password=" + encodeURIComponent("" + password) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {

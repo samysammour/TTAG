@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using TTAG.Domain.Model;
-using TTAG.Domain.Repository;
-using TTAG.Domain.Service;
-using TTAG.Infrastructure.Azure;
-
-namespace TTAK.Controllers
+﻿namespace TTAK.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using TTAG.Domain.Model;
+    using TTAG.Domain.Repository;
+    using TTAG.Domain.Service;
+
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
@@ -23,12 +21,12 @@ namespace TTAK.Controllers
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
 
-        public UsersController(ILogger<UsersController> logger, IUserService service, IMapper _mapper, IUserRepository userRepository)
+        public UsersController(ILogger<UsersController> logger, IUserService service, IMapper mapper, IUserRepository userRepository)
         {
             // build 123
             this.logger = logger;
             this.service = service;
-            mapper = _mapper;
+            this.mapper = mapper;
             this.userRepository = userRepository;
         }
 
@@ -41,26 +39,25 @@ namespace TTAK.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public IActionResult Login(string Username, string Password)
+        public IActionResult Login(string username, string password)
         {
-            return Ok(service.Login(Username, Password));
+            return this.Ok(this.service.Login(username, password));
         }
 
         [HttpGet]
-        public async Task< IActionResult> GetUser(string Id)
+        public async Task<IActionResult> GetUser(string id)
         {
-            return Ok(mapper.Map<TTAG.Domain.Model.User,UserViewModel>(await userRepository.GetByIdAsync(Id)));
+            return this.Ok(this.mapper.Map<TTAG.Domain.Model.User, UserViewModel>(await this.userRepository.GetByIdAsync(id)));
         }
-
 
         [HttpGet("TestYourToken")]
         [Authorize]
-        public IActionResult TestYourToken(string Username, string Password)
+        public IActionResult TestYourToken(string username, string password)
         {
-            var identity = User.Identity as ClaimsIdentity;
+            var identity = this.User.Identity as ClaimsIdentity;
             IEnumerable<Claim> claims = identity.Claims;
             var idclaim = claims.Where(x => x.Type == "Id").FirstOrDefault();
-            return Ok(idclaim.Value);
+            return this.Ok(idclaim.Value);
         }
     }
 }

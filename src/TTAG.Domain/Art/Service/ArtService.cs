@@ -1,7 +1,7 @@
 ﻿namespace TTAG.Domain.Service
 {
-    using Model;
     using System.Threading.Tasks;
+    using Model;
     using TTAG.Domain.Repository;
 
     public class ArtService : IArtService
@@ -15,7 +15,6 @@
 
         public async Task<Art> AddOrUpdate(Art art)
         {
-
             art = await this.artRepository.AddOrUpdateAsync(art).ConfigureAwait(false);
             return art;
         }

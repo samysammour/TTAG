@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace TTAG.Common
+﻿namespace TTAG.Common
 {
+    using System;
+    using Newtonsoft.Json;
+
     public class Entity
     {
         [JsonProperty(PropertyName = "id")]

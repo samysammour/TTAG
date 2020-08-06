@@ -1,7 +1,7 @@
-﻿using TTAG.Domain.Model;
-
-namespace TTAG.Domain.Validation
+﻿namespace TTAG.Domain.Validation
 {
+    using TTAG.Domain.Model;
+
     public class UserValidator : Validator
     {
         private readonly User user;

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using TTAG.Domain.Model;
-using TTAG.Domain.Profile.Helpers;
-using TTAG.Domain.Repository;
-using TTAG.Infrastructure.Azure;
-
-namespace TTAK.Controllers
+﻿namespace TTAK.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using TTAG.Domain.Model;
+    using TTAG.Domain.Profile.Helpers;
+    using TTAG.Domain.Repository;
+
     [ApiController]
     [Route("[controller]")]
     public class ArtController : ControllerBase
@@ -39,8 +37,8 @@ namespace TTAK.Controllers
             {
                 throw new UnauthorizedAccessException($"User {this.profileHelper.GetEmail()} is not authorized");
             }
-            //var profile = this.profileHelper.GetCurrentProfile();
 
+            // var profile = this.profileHelper.GetCurrentProfile();
             return await this.repository.GetByIdAsync(id).ConfigureAwait(false);
         }
 

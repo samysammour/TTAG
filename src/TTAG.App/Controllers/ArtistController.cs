@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using TTAG.Domain.Model;
-using TTAG.Domain.Repository;
-using TTAG.Domain;
-
-namespace TTAK.Controllers
+﻿namespace TTAK.Controllers
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+    using TTAG.Domain.Model;
+    using TTAG.Domain.Repository;
+
     [ApiController]
     [Route("[controller]")]
     public class ArtistController : ControllerBase

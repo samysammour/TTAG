@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TTAG.Infrastructure.Azure;
-using TTAG.Domain.Model;
-
-namespace TTAG.Domain.Repository
+﻿namespace TTAG.Domain.Repository
 {
+    using TTAG.Domain.Model;
+    using TTAG.Infrastructure.Azure;
+
     public class ArtRepository : CosmosDbRepository<Art>, IArtRepository
     {
         public ArtRepository()

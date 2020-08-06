@@ -1,6 +1,5 @@
 ﻿namespace TTAG.Domain.Model
 {
-    using Newtonsoft.Json;
     using System;
     using TTAG.Common;
 

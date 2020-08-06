@@ -5,11 +5,16 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTAG.App", "src\TTAG.App\TTAG.App.csproj", "{111768B2-58C5-4570-942E-A1EA7FAE7F36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTAG.Infrastructure.Azure", "src\TTAG.Infrastructure.Azure\TTAG.Infrastructure.Azure.csproj", "{70CB43F5-7523-4D50-8135-1C322041003C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTAG.Infrastructure.Azure", "src\TTAG.Infrastructure.Azure\TTAG.Infrastructure.Azure.csproj", "{70CB43F5-7523-4D50-8135-1C322041003C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTAG.Domain", "src\TTAG.Domain\TTAG.Domain.csproj", "{28DB0BC5-234A-4C25-8008-9BDDFD366B3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTAG.Domain", "src\TTAG.Domain\TTAG.Domain.csproj", "{28DB0BC5-234A-4C25-8008-9BDDFD366B3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTAG.Common", "src\TTAG.Common\TTAG.Common.csproj", "{9E2F164A-7A90-4A47-86F7-E96E2FCE0133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTAG.Common", "src\TTAG.Common\TTAG.Common.csproj", "{9E2F164A-7A90-4A47-86F7-E96E2FCE0133}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Directory", "Directory", "{EBCA97DB-E0CE-4B57-AEE0-265393831229}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

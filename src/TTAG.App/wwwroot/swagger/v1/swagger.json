@@ -365,13 +365,13 @@
         "parameters": [
           {
             "type": "string",
-            "name": "Username",
+            "name": "username",
             "in": "query",
             "x-nullable": true
           },
           {
             "type": "string",
-            "name": "Password",
+            "name": "password",
             "in": "query",
             "x-nullable": true
           }
@@ -396,7 +396,7 @@
         "parameters": [
           {
             "type": "string",
-            "name": "Id",
+            "name": "id",
             "in": "query",
             "x-nullable": true
           }
@@ -421,13 +421,13 @@
         "parameters": [
           {
             "type": "string",
-            "name": "Username",
+            "name": "username",
             "in": "query",
             "x-nullable": true
           },
           {
             "type": "string",
-            "name": "Password",
+            "name": "password",
             "in": "query",
             "x-nullable": true
           }

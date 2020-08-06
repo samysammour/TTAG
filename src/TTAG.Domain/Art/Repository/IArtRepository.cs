@@ -1,6 +1,7 @@
-﻿using TTAG.Domain.Model;
-namespace TTAG.Domain.Repository
+﻿namespace TTAG.Domain.Repository
 {
+    using TTAG.Domain.Model;
+
     public interface IArtRepository : IRepository<Art>
     {
     }

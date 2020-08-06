@@ -1,7 +1,7 @@
 ﻿namespace TTAG.Domain.Profile.Helpers
 {
-    using Profile.Model;
     using System.Security.Claims;
+    using TTAG.Domain.Profile.Model;
 
     public class ProfileHelper : IProfileHelper
     {
