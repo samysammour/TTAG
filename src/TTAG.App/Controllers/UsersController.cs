@@ -25,6 +25,7 @@ namespace TTAK.Controllers
 
         public UsersController(ILogger<UsersController> logger, IUserService service, IMapper _mapper, IUserRepository userRepository)
         {
+            // build 
             this.logger = logger;
             this.service = service;
             mapper = _mapper;
