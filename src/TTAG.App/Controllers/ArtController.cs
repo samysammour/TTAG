@@ -22,6 +22,8 @@
             this.logger = logger;
             this.repository = repository;
             this.profileHelper = profileHelper;
+
+            // try build
         }
 
         [HttpGet]
