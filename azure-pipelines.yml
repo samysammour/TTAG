@@ -32,6 +32,7 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
@@ -39,6 +40,19 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    command: install
+    workingDir: src/TTAG.ClientApp
+
+- task: Npm@1
+  displayName: 'Build Angular'
+  inputs:
+    command: custom
+    customCommand: run build -- $(ngBuildConfiguration)
+    workingDir: src/TTAG.ClientApp
+    
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
