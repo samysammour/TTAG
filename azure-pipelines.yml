@@ -50,7 +50,7 @@ steps:
   displayName: 'Build Angular'
   inputs:
     command: custom
-    customCommand: run build -- $(ngBuildConfiguration)
+    customCommand: run build_prd
     workingDir: src/TTAG.ClientApp
     
 - task: PublishBuildArtifacts@1
